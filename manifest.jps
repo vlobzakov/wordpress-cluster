@@ -48,25 +48,34 @@
             "PATH": "https://raw.githubusercontent.com/jelastic-jps/wordpress-cluster/dev",
             "DB_USER": "jelastic-${fn.random}",
             "DB_PASS": "${fn.password(20)}",
-            "WEBROOT_PATH": "/var/www/webroot/ROOT",
             "ADMIN_PASSWD": "${fn.password(20)}",
-            "DB_NAME": "wordpress"
+            "WP_TITLE": "Hello World"
         },
         "onInstall": [{
-                "log": "DB Cluster Setup"
-            }, {
-                "installJps": {
-                    "jps": "https://raw.githubusercontent.com/sych74/mysql-cluster/master/multimaster-configuration.jps",
-                    "settings": {
-                        "db_user": "${globals.DB_USER}",
-                        "db_pass": "${globals.DB_PASS}"
-                    }
+            "log": "DB Cluster Setup"
+        }, {
+            "installJps": {
+                "jps": "https://raw.githubusercontent.com/sych74/mysql-cluster/master/multimaster-configuration.jps",
+                "settings": {
+                    "db_user": "${globals.DB_USER}",
+                    "db_pass": "${globals.DB_PASS}"
                 }
-            }, {
-                "log": "Download and Unpack Content"
-            }, {
-                "cmd[storage]": ["wget -qO- 'https://wordpress.org/wordpress-4.7.3.tar.gz' | tar xz -C /tmp", "mv /tmp/wordpress/* /data"]
             }
-        ]
+        }, {
+            "log": "Download and Unpack Content"
+        }, {
+            "cmd[storage]": ["wget -qO- 'https://wordpress.org/wordpress-4.7.3.tar.gz' | tar xz -C /tmp && mv /tmp/wordpress/* /data"]
+        }, {
+            "installJps": {
+                "jps": "${globals.PATH}/addons/setup-wordpress.jps",
+                "settings": {
+                    "DB_HOST": "DB_1",
+                    "DB_USER": "${globals.DB_USER}",
+                    "DB_PASS": "${globals.DB_PASS}",
+                    "ADMIN_PASSWD": "${globals.ADMIN_PASSWD}",
+                    "WP_TITLE": "${globals.WP_TITLE}"
+                }
+            }
+        }]
     }
 }
