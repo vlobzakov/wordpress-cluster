@@ -41,16 +41,27 @@
                     "cloudlets": 8,
                     "nodeGroup": "bl",
                     "displayName": "Load balancer"
-                }],
-                "globals": {
-                    "PATH": "https://raw.githubusercontent.com/jelastic-jps/magento/dev/magento-cluster",
-                    "DB_USER": "jelastic-${fn.random}",
-                    "DB_PASS": "${fn.password(20)}",
-                    "WEBROOT_PATH": "/var/www/webroot/ROOT",
-                    "ADMIN_PASSWD": "${fn.password(20)}",
-                    "DB_NAME": "wordpress"
+                }]
+            }
+        },
+        "globals": {
+            "PATH": "https://raw.githubusercontent.com/jelastic-jps/wordpress-cluster/dev",
+            "DB_USER": "jelastic-${fn.random}",
+            "DB_PASS": "${fn.password(20)}",
+            "WEBROOT_PATH": "/var/www/webroot/ROOT",
+            "ADMIN_PASSWD": "${fn.password(20)}",
+            "DB_NAME": "wordpress"
+        },
+        "onInstall": [{
+            "log": "Multimaster DB Cluster Setup"
+        }, {
+            "installJps": {
+                "jps": "https://raw.githubusercontent.com/sych74/mysql-cluster/master/multimaster-configuration.jps",
+                "settings": {
+                    "db_user": "${globals.DB_USER}",
+                    "db_pass": "${globals.DB_PASS}"
                 }
             }
-        }
+        }]
     }
 }
