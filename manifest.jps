@@ -53,15 +53,20 @@
             "DB_NAME": "wordpress"
         },
         "onInstall": [{
-            "log": "Multimaster DB Cluster Setup"
-        }, {
-            "installJps": {
-                "jps": "https://raw.githubusercontent.com/sych74/mysql-cluster/master/multimaster-configuration.jps",
-                "settings": {
-                    "db_user": "${globals.DB_USER}",
-                    "db_pass": "${globals.DB_PASS}"
+                "log": "DB Cluster Setup"
+            }, {
+                "installJps": {
+                    "jps": "https://raw.githubusercontent.com/sych74/mysql-cluster/master/multimaster-configuration.jps",
+                    "settings": {
+                        "db_user": "${globals.DB_USER}",
+                        "db_pass": "${globals.DB_PASS}"
+                    }
                 }
+            }, {
+                "log": "Download and Unpack Content"
+            }, {
+                "cmd[storage]": ["wget -qO- 'https://wordpress.org/wordpress-4.7.3.tar.gz' | tar xz -C /tmp", "mv /tmp/wordpress/* /data"]
             }
-        }]
+        ]
     }
 }
