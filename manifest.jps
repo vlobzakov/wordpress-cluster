@@ -8,7 +8,6 @@
         "logo": "https://download.jelastic.com/public.php?service=files&t=3da2215839f82aa50d3d961271cd1cb9&download",
         "env": {
             "topology": {
-                "ssl": true,
                 "nodes": [{
                     "image": "jelastic/mysql:5.7.14",
                     "count": 2,
@@ -17,7 +16,7 @@
                     "displayName": "Database"
                 }, {
                     "image": "devbeta/nginxphp:1.10.1-php-7.0.10",
-                    "count": 1,
+                    "count": 2,
                     "cloudlets": 8,
                     "nodeGroup": "cp",
                     "links": "sqldb:DB",
@@ -37,7 +36,8 @@
                     "displayName": "Storage"
                 }, {
                     "image": "devbeta/nginxbalancer:1.10.1",
-                    "count": 1,
+                    "extip": true,
+                    "count": 2,
                     "cloudlets": 8,
                     "nodeGroup": "bl",
                     "displayName": "Load balancer"
