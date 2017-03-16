@@ -69,11 +69,11 @@
             "installJps": {
                 "jps": "${globals.PATH}/addons/setup-wordpress.jps",
                 "settings": {
-                    "DB_HOST": "DB_1",
-                    "DB_USER": "${globals.DB_USER}",
-                    "DB_PASS": "${globals.DB_PASS}",
-                    "ADMIN_PASSWD": "${globals.ADMIN_PASSWD}",
-                    "WP_TITLE": "${globals.WP_TITLE}"
+                    "db_host": "DB_1",
+                    "db_user": "${globals.DB_USER}",
+                    "db_pass": "${globals.DB_PASS}",
+                    "admin_passwd": "${globals.ADMIN_PASSWD}",
+                    "wp_title": "${globals.WP_TITLE}"
                 }
             }
         }]
