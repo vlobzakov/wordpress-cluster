@@ -52,7 +52,7 @@
             "WP_TITLE": "Hello World"
         },
         "onInstall": [{
-            "log": "DB Cluster Setup"
+            "log": "DB Multi-Master Cluster Setup"
         }, {
             "installJps": {
                 "jps": "https://raw.githubusercontent.com/sych74/mysql-cluster/master/multimaster-configuration.jps",
@@ -71,9 +71,11 @@
                 }
             }
         }, {
-            "log": "Download and Unpack Content"
+            "log": "Download and Unpack latest WordPress"
         }, {
-            "cmd[storage]": ["wget -qO- 'https://wordpress.org/wordpress-4.7.3.tar.gz' | tar xz -C /tmp && mv /tmp/wordpress/* /data"]
+            "cmd[storage]": ["wget -qO- 'https://wordpress.org/latest.tar.gz' | tar xz -C /tmp && mv /tmp/wordpress/* /data"]
+        }, {
+            "log": "Setup WordPress"
         }, {
             "installJps": {
                 "jps": "${globals.PATH}/addons/setup-wordpress.jps",
@@ -85,6 +87,13 @@
                     "wp_title": "${globals.WP_TITLE}"
                 }
             }
+        }, {
+            "log": "Install HyperDB - is an advanced database class that supports replication, failover, load balancing and partitioning. "
+        }, {
+            "cmd[storage]": [
+                "wget ${globals.PATH}/configs/db-config.php -O /data/db-config.php",
+                "wget ${globals.PATH}/configs/db.php -O /data/wp-content/db.php"
+            ]
         }],
         "actions": {
             "setupNode": [{
