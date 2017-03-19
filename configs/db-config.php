@@ -230,7 +230,7 @@ $wpdb->add_database(array(
 	'user'     => DB_USER,
 	'password' => DB_PASSWORD,
 	'name'     => DB_NAME,
-	'write'    => 0,
+	'write'    => 1,
 	'read'     => 1,
 	'dataset'  => 'global',
 	'timeout'  => 0.2,
