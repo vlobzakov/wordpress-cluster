@@ -15,7 +15,7 @@
                     "nodeGroup": "sqldb",
                     "displayName": "Database"
                 }, {
-                    "image": "devbeta/nginxphp:1.10.1-php-7.0.10",
+                    "image": "jelastic/nginxphp:1.10.1-php-7.0.10",
                     "count": 2,
                     "cloudlets": 8,
                     "nodeGroup": "cp",
@@ -42,6 +42,22 @@
                     "nodeGroup": "bl",
                     "displayName": "Load balancer"
                 }]
+            },
+            "onAfterScaleOut[nodeGroup:cp]": [{
+                "forEach(event.response.nodes)": {
+                    "setupNode": {
+                        "filter": "${@i.id}",
+                        "intIP": "${@i.intIP}"
+                    },
+                    "setNodeDisplayName [${@i.id}]": "AppServer"
+                }
+            }],
+            "onBeforeScaleIn[nodeGroup:cp]": {
+                "forEach(event.response.nodes)": {
+                    "removeNode": {
+                        "intIP": "${@i.intIP}"
+                    }
+                }
             }
         },
         "globals": {
@@ -52,6 +68,10 @@
             "WP_TITLE": "Hello World"
         },
         "onInstall": [{
+            "log": "Auto Scaling Triggers"
+        }, {
+            "script": "${globals.PATH}/scripts/addTriggers.js"
+        }, {
             "log": "DB Multi-Master Cluster Setup"
         }, {
             "installJps": {
@@ -71,7 +91,7 @@
                 }
             }
         }, {
-            "log": "Download and Unpack latest WordPress"
+            "log": "Download and Unpack latest WordPress release"
         }, {
             "cmd[storage]": ["wget -qO- 'https://wordpress.org/latest.tar.gz' | tar xz -C /tmp && mv /tmp/wordpress/* /data"]
         }, {
