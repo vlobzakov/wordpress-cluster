@@ -4,11 +4,13 @@
     "description": "This addon for plugins install",
     "globals": {
         "SERVER_WEBROOT": "/var/www/webroot/ROOT",
+        "PLUGINS_LIST": ""
+        
     },
     "onInstall": {
         "cmd[${nodes.cp[0].id}]": [
-            "wp --allow-root plugin install wp-super-cache --activate --path=/var/www/webroot/ROOT",
-            "chown nginx:nginx -R ${globals.SERVER_WEBROOT}/*"
+            "wget "
+            "while read plugin; do wp --allow-root plugin install $plugin --activate --path=/var/www/webroot/ROOT; done < /tmp/plugins"
         ]
     }
 }
