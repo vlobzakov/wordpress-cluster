@@ -17,6 +17,7 @@
         },
         "env": {
             "topology": {
+                "ssl": "true",
                 "nodes": [{
                     "image": "jelastic/mysql:5.7.14",
                     "count": 2,
@@ -45,7 +46,6 @@
                     "displayName": "Storage"
                 }, {
                     "image": "jelastic/nginxbalancer:1.10.1",
-                    "extip": true,
                     "count": 2,
                     "cloudlets": 8,
                     "nodeGroup": "bl",
@@ -121,6 +121,12 @@
             "cmd[storage]": [
                 "wget ${globals.PATH}/configs/db-config.php -O /data/db-config.php",
                 "wget ${globals.PATH}/configs/db.php -O /data/wp-content/db.php"
+            ]
+        }, {
+            "log": "Enabled SSL for WordPress. "
+        }, {
+            "cmd[storage]": [
+                "sed -i '/<?php/a define(\"FORCE_SSL_ADMIN\", true);' /data/wp-config.php"
             ]
         }],
         "actions": {
