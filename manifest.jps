@@ -135,7 +135,7 @@
             "installJps": {
                 "jps": "${globals.PATH}/addons/install-plugins.jps",
                 "settings": {
-                    "plugins_list": "${globals.PATH}/configs/"
+                    "plugins_list": "${globals.PATH}/configs/plugins"
                 }
             }
         }],
