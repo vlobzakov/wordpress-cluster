@@ -129,7 +129,7 @@
                 "sed -i \"/<?php/a if (strpos(\"'$_SERVER'\"['HTTP_X_FORWARDED_PROTO'], 'https') !== false) \"'$_SERVER'\"['HTTPS']='on';\" /data/wp-config.php",
                 "sed -i \"/<?php/a define('FORCE_SSL_ADMIN', true);\" /data/wp-config.php"
             ]
-        }{
+        }, {
             "log": "Plugins install"
         }, {
             "installJps": {
