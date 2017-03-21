@@ -4,12 +4,12 @@
     "description": "This addon for plugins install",
     "globals": {
         "SERVER_WEBROOT": "/var/www/webroot/ROOT",
-        "PLUGINS_LIST": ""
+        "PLUGINS_LIST": "${settings.plugins_list}"
         
     },
     "onInstall": {
         "cmd[${nodes.cp[0].id}]": [
-            "wget "
+            "wget ${globals.PLUGINS_LIST} -O /tmp/plugins",
             "while read plugin; do wp --allow-root plugin install $plugin --activate --path=/var/www/webroot/ROOT; done < /tmp/plugins"
         ]
     }
