@@ -22,7 +22,7 @@ ST     |  Shared Storage |           1                    |           1/8       
 * ST - Shared Storage
 
 **Wordpress Version**: Latest version<br/>
-**Nginx Version**: 1.10.0<br/>
+**Nginx Version**: 1.10.1<br/>
 **Php Version**: 7.0.10<br/>
 **MySQL Database**: 5.7.14<br/>
 
