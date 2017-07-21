@@ -83,7 +83,7 @@
             "log": "DB Multi-Master Cluster Setup"
         }, {
             "installJps": {
-                "jps": "https://raw.githubusercontent.com/jelastic-jps/mysql-cluster/dev/scripts/multimaster-configuration.jps",
+                "jps": "https://raw.githubusercontent.com/jelastic-jps/mysql-cluster/master/scripts/cluster-configuration.jps",
                 "settings": {
                     "db_user": "${globals.DB_USER}",
                     "db_pass": "${globals.DB_PASS}"
