@@ -70,7 +70,7 @@
             }
         },
         "globals": {
-            "PATH": "https://raw.githubusercontent.com/jelastic-jps/wordpress-cluster/master",
+            "PATH": "https://raw.githubusercontent.com/jelastic-jps/wordpress-cluster/JE-33367",
             "DB_USER": "jelastic-${fn.random}",
             "DB_PASS": "${fn.password(20)}",
             "ADMIN_PASSWD": "${fn.password(20)}"
